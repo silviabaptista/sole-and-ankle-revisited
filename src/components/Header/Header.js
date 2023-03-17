@@ -6,6 +6,8 @@ import Logo from "../Logo";
 import SuperHeader from "../SuperHeader";
 import MobileMenu from "../MobileMenu";
 import Icon from "../Icon";
+import UnstyledButton from "../UnstyledButton";
+import VisuallyHidden from "../VisuallyHidden";
 
 const Header = () => {
     const [showMobileMenu, setShowMobileMenu] = React.useState(false);
@@ -19,10 +21,10 @@ const Header = () => {
         <header>
             <SuperHeader />
             <MainHeader>
-                <Side>
+                <LogoWrapper>
                     <Logo />
-                </Side>
-                <Nav>
+                </LogoWrapper>
+                <DesktopNav>
                     <NavLink href="/sale">Sale</NavLink>
                     <NavLink href="/new">New&nbsp;Releases</NavLink>
                     <NavLink href="/men">Men</NavLink>
@@ -31,15 +33,22 @@ const Header = () => {
                     <NavLink href="/collections">Collections</NavLink>
                     <NavLink href="/collections">Collections</NavLink>
                     <NavLink href="/collections">Collections</NavLink>
-                </Nav>
-                <MobileNav>
-                    <Icon id="shopping-bag" strokeWidth={1} />
-                    <Icon id="search" strokeWidth={1} />
-                    <Menu onClick={() => setShowMobileMenu(true)}>
+                </DesktopNav>
+                <MobileActions>
+                    <UnstyledButton>
+                        <Icon id="shopping-bag" strokeWidth={1} />
+                        <VisuallyHidden>Open cart</VisuallyHidden>
+                    </UnstyledButton>
+                    <UnstyledButton>
+                        <Icon id="search" strokeWidth={1} />
+                        <VisuallyHidden>Search</VisuallyHidden>
+                    </UnstyledButton>
+                    <UnstyledButton onClick={() => setShowMobileMenu(true)}>
                         <Icon id="menu" strokeWidth={1} />
-                    </Menu>
-                </MobileNav>
-                <Side />
+                        <VisuallyHidden>Menu</VisuallyHidden>
+                    </UnstyledButton>
+                </MobileActions>
+                <Filler />
             </MainHeader>
 
             <MobileMenu
@@ -58,9 +67,19 @@ const MainHeader = styled.div`
     border-bottom: 1px solid ${COLORS.gray[300]};
     overflow-x: auto;
     overflow-y: hidden;
+
+    @media ${QUERIES.tablet} {
+        border-top: 4px solid ${COLORS.gray[900]};
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    @media ${QUERIES.phone} {
+        padding: 18px 16px;
+    }
 `;
 
-const Nav = styled.nav`
+const DesktopNav = styled.nav`
     display: flex;
     gap: clamp(1rem, 4.3vw - 1.5rem, 3.6rem);
     margin: 0px 48px;
@@ -70,24 +89,31 @@ const Nav = styled.nav`
     }
 `;
 
-const MobileNav = styled.div`
+const MobileActions = styled.div`
     display: none;
-    margin-left: auto;
 
     @media ${QUERIES.tablet} {
         display: flex;
-        gap: 40px;
-        justify-content: space-between;
+        gap: 32px;
+    }
+
+    @media ${QUERIES.phone} {
+        gap: 16px;
     }
 `;
 
-const Menu = styled.button`
-    border: none;
-    background: none;
+const LogoWrapper = styled.div`
+    flex: 1;
+    @media ${QUERIES.tablet} {
+        flex: revert;
+    }
 `;
 
-const Side = styled.div`
+const Filler = styled.div`
     flex: 1;
+    @media ${QUERIES.tablet} {
+        display: none;
+    }
 `;
 
 const NavLink = styled.a`

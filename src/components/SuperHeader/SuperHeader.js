@@ -9,19 +9,16 @@ import Icon from "../Icon";
 
 const SuperHeader = () => {
     return (
-        <>
-            <Border></Border>
-            <Wrapper>
-                <MarketingMessage>
-                    Free shipping on domestic orders over $75!
-                </MarketingMessage>
-                <SearchInput />
-                <HelpLink href="/help">Help</HelpLink>
-                <UnstyledButton>
-                    <Icon id="shopping-bag" strokeWidth={1} />
-                </UnstyledButton>
-            </Wrapper>
-        </>
+        <Wrapper>
+            <MarketingMessage>
+                Free shipping on domestic orders over $75!
+            </MarketingMessage>
+            <SearchInput />
+            <HelpLink href="/help">Help</HelpLink>
+            <UnstyledButton>
+                <Icon id="shopping-bag" strokeWidth={1} />
+            </UnstyledButton>
+        </Wrapper>
     );
 };
 
@@ -38,16 +35,6 @@ const Wrapper = styled.div`
 
     @media ${QUERIES.tablet} {
         display: none;
-    }
-`;
-
-const Border = styled.div`
-    background-color: ${COLORS.gray[900]};
-    height: 4px;
-    display: none;
-
-    @media ${QUERIES.tablet} {
-        display: block;
     }
 `;
 
